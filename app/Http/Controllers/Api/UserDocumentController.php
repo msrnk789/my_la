@@ -255,5 +255,22 @@ class UserDocumentController extends Controller
         }
     }
 
+    public function user_profile(Request $request)
+    {
+        $user = BidDocumentType::select('id','name')->with('document_name')->get();
+        
+        foreach ($user as $value) {
+            foreach ($value->document_name as $name) {
+                foreach ($name->user_document_name as $value) {
+                    $value['status'];
+
+                }
+            }
+        }
+        $user['user_profile'] = Auth::user();
+         
+        return response()->json(['data'=>$user], 200);
+    }
+
 
 }
