@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function conversations(){
+        return \App\Conversation::where('user1', $this->id)->orWhere('user2', $this->id)->get();
+    }
+
+    public function messages(){
+        return $this->hasMany(App\Message::class, 'user_id');
+    }
 }
