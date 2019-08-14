@@ -218,13 +218,17 @@ class FileController extends Controller
 
    	public function download_ppt($id)
    {
-       $user = User::where('id','=',$id)->first();
-       $file = public_path('storage/ppt/'.$user->ppt);
-       //return $file;
-        $headers = ['Content-Type: application/pptx'];
-        $fileName = $user->first_name.'.pptx';
+      $user = User::where('id','=',$id)->first();
+      $file = public_path('storage/ppt/'.$user->ppt);
+      //return $file;
+      $headers = ['Content-Type: application/pptx'];
+      $fileName = $user->first_name.'.pptx';
         
-        return Response::download($file,$fileName,$headers);
+      return Response::download($file,$fileName,$headers);
    }
+
+      $id =$request->get('val');
+      $sub_category = SubCategory::where('category_id','=',$id)->get();
+      return response()->json($sub_category);
 
 }
